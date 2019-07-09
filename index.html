@@ -3,70 +3,70 @@
 
 <head>
 <meta charset="utf-8">
-<title>Nora's Letters</title>
+<title>Preschool Practice Sheet</title>
 <meta name="description" content="">
 
+<meta name="msapplication-tap-highlight" content="no" />
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="application-name" content="Nora's Letters">
-<meta name="apple-mobile-web-app-title" content="Nora's Letters">
+<meta name="application-name" content="Preschool Practice">
+<meta name="apple-mobile-web-app-title" content="Preschool Practice">
 <meta name="theme-color" content="#ffc000">
 <meta name="msapplication-navbutton-color" content="#ffc000">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<link rel="icon" href="img/favicon-letters-128.png" sizes="128x128">
-<link rel="apple-touch-icon" href="img/favicon-letters-128.png">
-<link rel="icon" href="img/favicon-letters-144.png" sizes="144x144">
-<link rel="apple-touch-icon" href="img/favicon-letters-144.png">
-<link rel="icon" href="img/favicon-letters-152.png" sizes="152x152">
-<link rel="apple-touch-icon" href="img/favicon-letters-152.png">
-<link rel="icon" href="img/favicon-letters-192.png" sizes="192x192">
-<link rel="apple-touch-icon" href="img/favicon-letters-192.png">
-
-<link rel="stylesheet" href="css/abc.css?v=4">
+<link rel="stylesheet" href="css/abc.css?v=8">
 
 </head>
 
 <body>
 
-<div id="app">
+<div id="app" v-bind:class="currentColor">
 
     <div class="columns">
 
         <div class="btn-row">
             <div>
                 <button @click="mode = 'sheet'" v-bind:class="{ active: mode == 'sheet' }">Sheet</button> <button @click="mode = 'single'" v-bind:class="{ active: mode == 'single' }">Single</button> <button @click="changeArray('alphabetUpper')" class="ml-extra"  v-bind:class="{ active: currentArray == 'alphabetUpper' }">ABC</button> <button
-                @click="changeArray('alphabetLower')" v-bind:class="{ active: currentArray == 'alphabetLower' }">abc</button> <button @click="changeArray('numbers')" v-bind:class="{ active: currentArray == 'numbers' }">123</button> <button class="ml-extra" @click="randomize()">Randomize</button>
+                @click="changeArray('alphabetLower')" v-bind:class="{ active: currentArray == 'alphabetLower' }">abc</button> <button @click="changeArray('numbers')" v-bind:class="{ active: currentArray == 'numbers' }">123</button> <button class="random ml-extra" @click="randomize()">Random</button>
             </div>
-            <div>
-                <h3>Nora's Letters</h3>
+            <div class="colors">
+                <button @click="colorPopup = true">Color</button>
             </div>
         </div>
         
-
-        <ul class="randomlist" v-bind:class="currentArray" v-if="mode == 'sheet'">
-
-            <li v-for="character in visibleArray" v-bind:class="{ hidden: character.visible == false }">
-                <button @click="hideSingleLetter(character)">
+        <ul class="randomlist" v-bind:class="currentArray" v-if="mode == 'sheet'" v-bind:key="randomKey">
+            <li v-for="character in visibleArray" v-bind:class="{ hidden: character.visible == false }" v-bind:key="character.character">
+                <button v-pan="(event) => hideSingleLetter(event,character)" v-tap="(event) => hideSingleLetter(event,character)">
                     {{ character.character }}
                 </button>
             </li>
-
         </ul><!-- .randomlist -->
 
         <div class="singlelist" v-if="mode == 'single'">
-            <button @click="showNewSingleLetter()">
+            <button v-pan="(event) => showNewSingleLetter(event)" v-tap="(event) => showNewSingleLetter(event)">
                 {{ visibleArray[singleModeIndex].character }}
             </button>
         </div><!-- .singlelist -->
+
+        <div class="color-popup" v-if="colorPopup">
+            <ul class="colorlist">
+                <li v-for="color in colorsArray" v-bind:class="colorClass(color)" v-bind:key="color">
+                    <button v-pan="(event) => changeColor(event,color)" v-tap="(event) => changeColor(event,color)">
+                        {{ color }}
+                    </button>
+                </li>
+            </ul><!-- .colorlist -->
+        </div><!-- .color-popup -->
 
     </div>
 
 </div><!-- #app -->
 
 <script src="js/vendor/vue.js"></script>
-<script src="js/abc.js"></script>
+<script src="js/vendor/hammer.min.js"></script>
+<script src="js/abc.js?v=8"></script>
 </body>
 
 </html>

@@ -345,16 +345,29 @@ body {
     
     margin:0px;
     /* height:100%; */
-    background-color:#A078CE;
 }
 #app {
-    /* height:100%; */
+    height:100%;
     padding:3vw 4vw 0px;
 }
 
+#app.purple {
+    background-color: #A078CE;
+}
+#app.blue {
+    background-color: #0597F2;
+}
+#app.orange {
+    background-color: #e78b1a;
+}
+#app.red {
+    background-color: #a23f37;
+}
+#app.green {
+    background-color: #91b216;
+}
+
 .randomlist {
-  /* display:flex;
-  flex-wrap: wrap; */
   display:grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   list-style:none;
@@ -369,12 +382,8 @@ body {
   font-size: 10vh;
   min-height: 11vh;
   text-align:center;
-  border:solid 2px #D9C0FF;
-  /* width:calc(16.66666% + 2px); */
+  border:solid 2px rgba(255,255,255,.15);
   margin:-2px 0px 0px -2px;
-}
-.randomlist.numbers li {
-  /* width:20%; */
 }
 .randomlist li button {
   width:100%;
@@ -384,16 +393,20 @@ body {
   background:transparent;
   color:#FFF;
   text-align:center;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -ms-transition:     all 0.2s ease;
+  -o-transition:      all 0.2s ease;
 }
 .randomlist li button:focus {
   outline:0;
 }
 .randomlist li.hidden button {
-  color:#A078CE;
+  color:transparent;
 }
 
 .singlelist {
-  border:solid 2px #D9C0FF;
+  border:solid 2px rgba(255,255,255,.15);
   font-size: 60vh;
   min-height: 60vh;
   line-height: 78vh;
@@ -419,22 +432,97 @@ body {
 .btn-row h3 {
   margin: 0px;
     font-size: 2vw;
-    color:#593674;
+    color:rgba(0,0,0,.5);
 }
 .btn-row button {
   border:0px;
-  background:#8B54B5;
+  padding:0px;
+  background:rgba(255,255,255,.15);
   color:#FFF;
-  padding:4px 12px;
   margin-right:6px;
+  width:60px;
+  height:60px;
+  line-height:60px;
+  border-radius: 50%;
+  font-size:14px;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition:    all 0.2s ease;
+  -ms-transition:     all 0.2s ease;
+  -o-transition:      all 0.2s ease;
 }
 .btn-row button.ml-extra {
-  margin-left:20px;
+  margin-left:30px;
+}
+.btn-row button.random {
+    overflow:hidden;
+    background-image:url('../img/refresh.svg');
+    background-repeat: no-repeat;
+    background-position:  center center;
+    background-size:18px 18px;
+    text-indent: -999px;
 }
 .btn-row button.active {
-  background:#593674;
+  background:rgba(0,0,0,.4);
 }
 .btn-row button:focus {
   outline:0;
 }
 
+.color-popup {
+    position: fixed;
+    top:50%;
+    left:50%;
+    background:#FFF;
+    padding:80px;
+    transform: translate(-50%, -50%);
+}
+.color-popup .colorlist {
+    list-style:none;
+    text-align: center;
+    margin:0px;
+    padding:0px;
+}
+.color-popup .colorlist li {
+    display:inline-block;
+    margin:0px 10px;
+    position: relative;
+}
+.color-popup .colorlist li button {
+    border:0px;
+    padding:0px;
+    background:rgba(0,0,0,.4);
+    color:#FFF;
+    margin-right:6px;
+    width:60px;
+    height:60px;
+    line-height:60px;
+    border-radius: 50%;
+    font-size:14px;
+    position: relative;
+}
+.color-popup .colorlist li.purple button {
+    background-color: #A078CE;
+}
+.color-popup .colorlist li.blue button {
+    background-color: #0597F2;
+}
+.color-popup .colorlist li.orange button {
+    background-color: #e78b1a;
+}
+.color-popup .colorlist li.red button {
+    background-color: #a23f37;
+}
+.color-popup .colorlist li.green button {
+    background-color: #91b216;
+}
+
+.color-popup .colorlist li.active button:before {
+    content:"";
+    position: absolute;
+    top:-4px;
+    right:-4px;
+    bottom:-4px;
+    left:-4px;
+    border:solid 2px #ccc;
+    border-radius: 50%;
+}

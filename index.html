@@ -1,0 +1,72 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+<meta charset="utf-8">
+<title>Nora's Letters</title>
+<meta name="description" content="">
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Nora's Letters">
+<meta name="apple-mobile-web-app-title" content="Nora's Letters">
+<meta name="theme-color" content="#ffc000">
+<meta name="msapplication-navbutton-color" content="#ffc000">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<link rel="icon" href="img/favicon-letters-128.png" sizes="128x128">
+<link rel="apple-touch-icon" href="img/favicon-letters-128.png">
+<link rel="icon" href="img/favicon-letters-144.png" sizes="144x144">
+<link rel="apple-touch-icon" href="img/favicon-letters-144.png">
+<link rel="icon" href="img/favicon-letters-152.png" sizes="152x152">
+<link rel="apple-touch-icon" href="img/favicon-letters-152.png">
+<link rel="icon" href="img/favicon-letters-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="img/favicon-letters-192.png">
+
+<link rel="stylesheet" href="css/abc.css?v=4">
+
+</head>
+
+<body>
+
+<div id="app">
+
+    <div class="columns">
+
+        <div class="btn-row">
+            <div>
+                <button @click="mode = 'sheet'" v-bind:class="{ active: mode == 'sheet' }">Sheet</button> <button @click="mode = 'single'" v-bind:class="{ active: mode == 'single' }">Single</button> <button @click="changeArray('alphabetUpper')" class="ml-extra"  v-bind:class="{ active: currentArray == 'alphabetUpper' }">ABC</button> <button
+                @click="changeArray('alphabetLower')" v-bind:class="{ active: currentArray == 'alphabetLower' }">abc</button> <button @click="changeArray('numbers')" v-bind:class="{ active: currentArray == 'numbers' }">123</button> <button class="ml-extra" @click="randomize()">Randomize</button>
+            </div>
+            <div>
+                <h3>Nora's Letters</h3>
+            </div>
+        </div>
+        
+
+        <ul class="randomlist" v-bind:class="currentArray" v-if="mode == 'sheet'">
+
+            <li v-for="character in visibleArray" v-bind:class="{ hidden: character.visible == false }">
+                <button @click="hideSingleLetter(character)">
+                    {{ character.character }}
+                </button>
+            </li>
+
+        </ul><!-- .randomlist -->
+
+        <div class="singlelist" v-if="mode == 'single'">
+            <button @click="showNewSingleLetter()">
+                {{ visibleArray[singleModeIndex].character }}
+            </button>
+        </div><!-- .singlelist -->
+
+    </div>
+
+</div><!-- #app -->
+
+<script src="js/vendor/vue.js"></script>
+<script src="js/abc.js"></script>
+</body>
+
+</html>
